@@ -1,29 +1,29 @@
 {
-  "name": "@baybreezy/file-extension-icon",
-  "version": "0.0.4",
-  "description": "Modern, lightweight package for folder and file extension specific Material icons and VSCode icons",
+  "name": "vscode-icon-resolver",
+  "version": "1.0.0",
+  "description": "VScode file and folder icon name resolver for Material, Catppuccin, and VSCode icons",
   "keywords": [
     "icon",
     "material",
+    "catppuccin",
     "vscode",
     "file-extension",
     "folder",
     "typescript",
     "esm"
   ],
-  "homepage": "https://github.com/BayBreezy/file-extension-icon",
+  "homepage": "https://github.com/DevYatsu/file-extension-icon",
   "bugs": {
-    "url": "https://github.com/BayBreezy/file-extension-icon/issues"
+    "url": "https://github.com/DevYatsu/file-extension-icon/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/BayBreezy/file-extension-icon"
+    "url": "https://github.com/DevYatsu/file-extension-icon"
   },
   "license": "MIT",
   "author": {
-    "name": "Behon Baker",
-    "email": "behon.baker@yahoo.com",
-    "url": "https://behonbaker.com"
+    "name": "Yanis",
+    "url": "https://github.com/DevYatsu"
   },
   "type": "module",
   "exports": {

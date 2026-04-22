@@ -17,5 +17,16 @@ const theme = new IconTheme({
   folderDefault: "folder",
 });
 
+/**
+ * Resolves the Catppuccin icon name for a given file.
+ * @param fileName - The name of the file (including extension if applicable)
+ * @returns The resolved icon name (defaults to "file")
+ */
 export const getCatppuccinFileIcon = (fileName: string) => theme.getFileIcon(fileName);
+
+/**
+ * Resolves the Catppuccin icon name for a given folder.
+ * @param folderName - The name of the folder
+ * @returns The resolved icon name (defaults to "folder")
+ */
 export const getCatppuccinFolderIcon = (folderName: string) => theme.getFolderIcon(folderName);

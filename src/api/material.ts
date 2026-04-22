@@ -20,6 +20,18 @@ const theme = new IconTheme({
   folderRootDefault: specificPack?.rootFolder?.name || "folder-root",
 });
 
+/**
+ * Resolves the Material icon name for a given file.
+ * @param fileName - The name of the file (including extension if applicable)
+ * @returns The resolved icon name
+ */
 export const getMaterialFileIcon = (fileName: string) => theme.getFileIcon(fileName);
+
+/**
+ * Resolves the Material icon name for a given folder.
+ * @param folderName - The name of the folder
+ * @param isRoot - Whether the folder is at the root of the workspace
+ * @returns The resolved icon name
+ */
 export const getMaterialFolderIcon = (folderName: string, isRoot = false) =>
   theme.getFolderIcon(folderName, isRoot);

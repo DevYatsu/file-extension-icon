@@ -1,23 +1,40 @@
 import { getBaseName } from "./utils";
 
+/**
+ * Configuration for a file icon mapping.
+ */
 export interface IconDefinition {
+  /** Canonical icon name (e.g., "file-typescript") */
   icon: string;
+  /** Exact file names that should match this icon */
   fileNames?: readonly string[];
+  /** File extensions (without dot) that should match this icon */
   extensions?: readonly string[];
+  /** Language-specific definitions from VSCode themes */
   languages?: readonly {
     readonly ids?: string | readonly string[];
     readonly knownExtensions?: readonly string[];
     readonly knownFilenames?: readonly string[];
   }[];
+  /** If true, the extension is treated as a full filename match */
   filename?: boolean;
+  /** Glob-like patterns for filename prefixes */
   filenamesGlob?: readonly string[];
+  /** Glob-like patterns for filename suffixes/extensions */
   extensionsGlob?: readonly string[];
+  /** Whether this mapping is disabled */
   disabled?: boolean;
 }
 
+/**
+ * Configuration for a folder icon mapping.
+ */
 export interface FolderDefinition {
+  /** Canonical icon name (e.g., "folder-src") */
   icon: string;
+  /** Exact folder names that should match this icon */
   folderNames: readonly string[];
+  /** Whether this mapping is disabled */
   disabled?: boolean;
 }
 
@@ -109,15 +126,23 @@ class FolderMatcher {
   }
 }
 
+/**
+ * Represents a complete icon theme with file and folder matching capabilities.
+ */
 export class IconTheme {
   private fileMatcher: IconMatcher;
   private folderMatcher: FolderMatcher;
 
   constructor(options: {
+    /** List of file icon definitions */
     fileDefinitions: readonly IconDefinition[];
+    /** Default icon to return for files if no match is found */
     fileDefault: string;
+    /** List of folder icon definitions */
     folderDefinitions: readonly FolderDefinition[];
+    /** Default icon to return for folders if no match is found */
     folderDefault: string;
+    /** Default icon to return for root folders */
     folderRootDefault?: string;
   }) {
     this.fileMatcher = new IconMatcher(options.fileDefinitions, options.fileDefault);
@@ -128,10 +153,21 @@ export class IconTheme {
     );
   }
 
+  /**
+   * Resolves the icon name for a given file.
+   * @param fileName - The name of the file or path
+   * @returns The resolved icon name
+   */
   public getFileIcon(fileName: string): string {
     return this.fileMatcher.getIcon(fileName);
   }
 
+  /**
+   * Resolves the icon name for a given folder.
+   * @param folderName - The name of the folder or path
+   * @param isRoot - Whether to resolve for a root folder
+   * @returns The resolved icon name
+   */
   public getFolderIcon(folderName: string, isRoot: boolean = false): string {
     return this.folderMatcher.getIcon(folderName, isRoot);
   }
