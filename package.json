@@ -36,9 +36,6 @@
   "main": "./dist/src/index.cjs",
   "module": "./dist/src/index.mjs",
   "types": "./dist/src/index.d.mts",
-  "bin": {
-    "file-icon": "./dist/cli/index.cjs"
-  },
   "files": [
     "dist"
   ],
@@ -64,7 +61,6 @@
     "*": "prettier --write ."
   },
   "devDependencies": {
-    "@clack/prompts": "^0.11.0",
     "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "^20.0.0",
     "@eslint/js": "^9.39.1",
@@ -73,15 +69,12 @@
     "@vitest/coverage-v8": "^4.0.10",
     "@vitest/ui": "^4.0.10",
     "changelogen": "^0.6.2",
-    "clipboardy": "^5.0.0",
-    "commander": "^14.0.2",
     "eslint": "^9.39.1",
     "globals": "^16.5.0",
     "husky": "^9.1.7",
     "jiti": "^2.6.1",
     "knip": "^5.70.1",
     "lint-staged": "^16.2.7",
-    "picocolors": "^1.1.1",
     "prettier": "^3.6.2",
     "tsdown": "^0.16.5",
     "typescript": "^5.9.3",
