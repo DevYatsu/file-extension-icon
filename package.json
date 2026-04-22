@@ -1,84 +1,84 @@
 {
-	"name": "vscode-icon-resolver",
-	"version": "1.0.0",
-	"description": "VScode file and folder icon name resolver for Material, Catppuccin, and VSCode icons",
-	"keywords": [
-		"icon",
-		"material",
-		"catppuccin",
-		"vscode",
-		"file-extension",
-		"folder",
-		"typescript",
-		"esm"
-	],
-	"homepage": "https://github.com/DevYatsu/file-extension-icon",
-	"bugs": {
-		"url": "https://github.com/DevYatsu/file-extension-icon/issues"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/DevYatsu/file-extension-icon.git"
-	},
-	"license": "MIT",
-	"author": {
-		"name": "Yanis",
-		"url": "https://github.com/DevYatsu"
-	},
-	"type": "module",
-	"exports": {
-		".": {
-			"types": "./dist/index.d.mts",
-			"import": "./dist/index.mjs",
-			"require": "./dist/index.cjs"
-		}
-	},
-	"main": "./dist/index.cjs",
-	"module": "./dist/index.mjs",
-	"types": "./dist/index.d.mts",
-	"files": [
-		"dist"
-	],
-	"scripts": {
-		"build": "tsdown",
-		"clean": "rm -rf dist coverage node_modules package-lock.json && ni && nr build",
-		"dev": "tsdown --watch",
-		"knip": "knip",
-		"lint": "eslint src",
-		"prepare": "husky",
-		"prepublishOnly": "npm run build",
-		"release": "changelogen --release --push && npm run build && npm publish",
-		"release:patch": "changelogen --release --patch",
-		"release:minor": "changelogen --release --minor",
-		"release:major": "changelogen --release --major",
-		"test": "vitest",
-		"test:coverage": "vitest --coverage",
-		"test:ui": "vitest --ui",
-		"typecheck": "tsc --noEmit"
-	},
-	"lint-staged": {
-		"*.{js,ts}": "eslint --fix",
-		"*": "prettier --write ."
-	},
-	"devDependencies": {
-		"@commitlint/cli": "^20.1.0",
-		"@commitlint/config-conventional": "^20.0.0",
-		"@eslint/js": "^9.39.1",
-		"@ianvs/prettier-plugin-sort-imports": "^4.7.0",
-		"@types/node": "^24.10.1",
-		"@vitest/coverage-v8": "^4.0.10",
-		"@vitest/ui": "^4.0.10",
-		"changelogen": "^0.6.2",
-		"eslint": "^9.39.1",
-		"globals": "^16.5.0",
-		"husky": "^9.1.7",
-		"jiti": "^2.6.1",
-		"knip": "^5.70.1",
-		"lint-staged": "^16.2.7",
-		"prettier": "^3.6.2",
-		"tsdown": "^0.16.5",
-		"typescript": "^5.9.3",
-		"typescript-eslint": "^8.47.0",
-		"vitest": "^4.0.10"
-	}
+  "name": "vscode-icon-resolver",
+  "version": "1.1.1",
+  "description": "VScode file and folder icon name resolver for Material, Catppuccin, and VSCode icons",
+  "keywords": [
+    "icon",
+    "material",
+    "catppuccin",
+    "vscode",
+    "file-extension",
+    "folder",
+    "typescript",
+    "esm"
+  ],
+  "homepage": "https://github.com/DevYatsu/file-extension-icon",
+  "bugs": {
+    "url": "https://github.com/DevYatsu/file-extension-icon/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DevYatsu/file-extension-icon.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Yanis",
+    "url": "https://github.com/DevYatsu"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "clean": "rm -rf dist coverage node_modules package-lock.json && ni && nr build",
+    "dev": "tsdown --watch",
+    "knip": "knip",
+    "lint": "eslint src",
+    "prepare": "husky",
+    "prepublishOnly": "npm run build",
+    "release": "changelogen --release --push && npm run build && npm publish",
+    "release:patch": "changelogen --release --patch",
+    "release:minor": "changelogen --release --minor",
+    "release:major": "changelogen --release --major",
+    "test": "vitest",
+    "test:coverage": "vitest --coverage",
+    "test:ui": "vitest --ui",
+    "typecheck": "tsc --noEmit"
+  },
+  "lint-staged": {
+    "*.{js,ts}": "eslint --fix",
+    "*": "prettier --write ."
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^20.1.0",
+    "@commitlint/config-conventional": "^20.0.0",
+    "@eslint/js": "^9.39.1",
+    "@ianvs/prettier-plugin-sort-imports": "^4.7.0",
+    "@types/node": "^24.10.1",
+    "@vitest/coverage-v8": "^4.0.10",
+    "@vitest/ui": "^4.0.10",
+    "changelogen": "^0.6.2",
+    "eslint": "^9.39.1",
+    "globals": "^16.5.0",
+    "husky": "^9.1.7",
+    "jiti": "^2.6.1",
+    "knip": "^5.70.1",
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.6.2",
+    "tsdown": "^0.16.5",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.47.0",
+    "vitest": "^4.0.10"
+  }
 }

@@ -10,8 +10,8 @@ import { VSIFolderExtensions } from "./types";
 
 export const extensions = {
   default: {
-    folder: { icon: "folder" },
-    root_folder: { icon: "root_folder" },
+    folder: { icon: "default_folder" },
+    root_folder: { icon: "default_root_folder" },
   },
   supported: [
     { icon: "android", extensions: ["android"] },

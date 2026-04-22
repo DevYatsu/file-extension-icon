@@ -11,7 +11,7 @@ import { VSIFileExtensions } from "./types";
 
 export const extensions = {
   default: {
-    file: { icon: "file" },
+    file: { icon: "default_file" },
   },
   supported: [
     {
@@ -1472,6 +1472,11 @@ export const extensions = {
       languages: [languages.dhall],
     },
     {
+      icon: "html",
+      extensions: ["html"],
+      languages: [languages.html],
+    },
+    {
       icon: "django",
       extensions: ["djt"],
       languages: [languages.django],
@@ -2327,11 +2332,6 @@ export const extensions = {
       icon: "host",
       extensions: [],
       languages: [languages.hosts],
-    },
-    {
-      icon: "html",
-      extensions: [],
-      languages: [languages.html],
     },
     {
       icon: "htmlhint",

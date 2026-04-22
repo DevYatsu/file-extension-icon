@@ -6,8 +6,8 @@ import { IconPack, MaterialFolderExtensions } from "./types";
 export const folderIcons = [
   {
     name: "specific",
-    defaultIcon: { name: "folder" },
-    rootFolder: { name: "folder-root" },
+    defaultIcon: { name: "default_folder" },
+    rootFolder: { name: "default_root_folder" },
     icons: [
       { name: "folder-rust", folderNames: ["rust"] },
       {
@@ -1278,8 +1278,8 @@ export const folderIcons = [
   },
   {
     name: "classic",
-    defaultIcon: { name: "folder" },
-    rootFolder: { name: "folder-root" },
+    defaultIcon: { name: "default_folder" },
+    rootFolder: { name: "default_root_folder" },
   },
   { name: "none", defaultIcon: { name: "" } },
 ] as const satisfies readonly MaterialFolderExtensions[];

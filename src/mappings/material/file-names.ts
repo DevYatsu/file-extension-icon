@@ -5,9 +5,9 @@ import { IconPack, MaterialFileExtensions } from "./types";
  * Defines file icons
  */
 export const fileIcons = {
-  defaultIcon: { name: "file" },
+  defaultIcon: { name: "default_file" },
   icons: parseByPattern([
-    { name: "html", fileExtensions: ["htm", "xhtml", "html_vm", "asp"] },
+    { name: "html", fileExtensions: ["htm", "html", "xhtml", "html_vm", "asp"] },
     {
       name: "pug",
       fileExtensions: ["jade", "pug"],
@@ -204,7 +204,8 @@ export const fileIcons = {
       ],
     },
     { name: "palette", fileExtensions: ["pal", "gpl", "act"] },
-    { name: "javascript", fileExtensions: ["esx", "mjs"] },
+    { name: "javascript", fileExtensions: ["js", "esx", "mjs"] },
+    { name: "typescript", fileExtensions: ["ts"] },
     { name: "react", fileExtensions: ["jsx"] },
     { name: "react_ts", fileExtensions: ["tsx"] },
     {

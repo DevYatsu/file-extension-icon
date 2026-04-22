@@ -7,6 +7,7 @@ describe("Catppuccin Icons API", () => {
     it("should return the icon name for standard extensions", () => {
       expect(getCatppuccinFileIcon("index.js")).toBe("javascript");
       expect(getCatppuccinFileIcon("styles.css")).toBe("css");
+      expect(getCatppuccinFileIcon("index.html")).toBe("html");
       expect(getCatppuccinFileIcon("main.py")).toBe("python");
     });
 
@@ -55,18 +56,18 @@ describe("Catppuccin Icons API", () => {
     it("should handle full paths and relative paths", () => {
       expect(getCatppuccinFileIcon("/path/to/index.js")).toBe("javascript");
       expect(getCatppuccinFileIcon("./local/Dockerfile")).toBe("docker");
-      expect(getCatppuccinFileIcon("C:\\Windows\\system32\\drivers\\etc\\hosts")).toBe("file");
+      expect(getCatppuccinFileIcon("C:\\Windows\\system32\\drivers\\etc\\hosts")).toBe("_file");
     });
 
     it("should handle edge cases like empty strings or strings with only dots", () => {
-      expect(getCatppuccinFileIcon("")).toBe("file");
-      expect(getCatppuccinFileIcon(".")).toBe("file");
-      expect(getCatppuccinFileIcon("..")).toBe("file");
-      expect(getCatppuccinFileIcon("file.")).toBe("file");
+      expect(getCatppuccinFileIcon("")).toBe("_file");
+      expect(getCatppuccinFileIcon(".")).toBe("_file");
+      expect(getCatppuccinFileIcon("..")).toBe("_file");
+      expect(getCatppuccinFileIcon("file.")).toBe("_file");
     });
 
     it("should return 'file' for unknown files", () => {
-      expect(getCatppuccinFileIcon("unknown.xyz123")).toBe("file");
+      expect(getCatppuccinFileIcon("unknown.xyz123")).toBe("_file");
     });
   });
 
@@ -92,12 +93,12 @@ describe("Catppuccin Icons API", () => {
     });
 
     it("should handle edge cases for folders", () => {
-      expect(getCatppuccinFolderIcon("")).toBe("folder");
-      expect(getCatppuccinFolderIcon(".")).toBe("folder");
+      expect(getCatppuccinFolderIcon("")).toBe("_folder");
+      expect(getCatppuccinFolderIcon(".")).toBe("_folder");
     });
 
     it("should return 'folder' for unknown folders", () => {
-      expect(getCatppuccinFolderIcon("unknown_random_folder")).toBe("folder");
+      expect(getCatppuccinFolderIcon("unknown_random_folder")).toBe("_folder");
     });
   });
 });

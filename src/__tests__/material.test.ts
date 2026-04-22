@@ -7,6 +7,7 @@ describe("Material Icons API", () => {
     it("should return the icon name for standard extensions", () => {
       expect(getMaterialFileIcon("index.mjs")).toBe("javascript");
       expect(getMaterialFileIcon("styles.css")).toBe("css");
+      expect(getMaterialFileIcon("index.html")).toBe("html");
     });
 
     it("should handle exact filename matches", () => {
@@ -51,13 +52,13 @@ describe("Material Icons API", () => {
     });
 
     it("should handle edge cases like empty strings or strings with only dots", () => {
-      expect(getMaterialFileIcon("")).toBe("file");
-      expect(getMaterialFileIcon(".")).toBe("file");
-      expect(getMaterialFileIcon("..")).toBe("file");
+      expect(getMaterialFileIcon("")).toBe("default_file");
+      expect(getMaterialFileIcon(".")).toBe("default_file");
+      expect(getMaterialFileIcon("..")).toBe("default_file");
     });
 
-    it("should return 'file' for unknown files", () => {
-      expect(getMaterialFileIcon("random.abc123xyz")).toBe("file");
+    it("should return 'default_file' for unknown files", () => {
+      expect(getMaterialFileIcon("random.abc123xyz")).toBe("default_file");
     });
   });
 
@@ -77,8 +78,8 @@ describe("Material Icons API", () => {
 
     it("should handle root folders", () => {
       expect(getMaterialFolderIcon("src", true)).toBe("folder-src"); // specific folder takes precedence
-      expect(getMaterialFolderIcon("unknown", true)).toBe("folder-root");
-      expect(getMaterialFolderIcon("", true)).toBe("folder-root");
+      expect(getMaterialFolderIcon("unknown", true)).toBe("default_root_folder");
+      expect(getMaterialFolderIcon("", true)).toBe("default_root_folder");
     });
 
     it("should handle paths for folders", () => {
@@ -87,12 +88,12 @@ describe("Material Icons API", () => {
     });
 
     it("should handle edge cases for folders", () => {
-      expect(getMaterialFolderIcon("")).toBe("folder");
-      expect(getMaterialFolderIcon(".")).toBe("folder");
+      expect(getMaterialFolderIcon("")).toBe("default_folder");
+      expect(getMaterialFolderIcon(".")).toBe("default_folder");
     });
 
-    it("should return 'folder' for unknown folders", () => {
-      expect(getMaterialFolderIcon("unknown-folder")).toBe("folder");
+    it("should return 'default_folder' for unknown folders", () => {
+      expect(getMaterialFolderIcon("unknown-folder")).toBe("default_folder");
     });
   });
 });

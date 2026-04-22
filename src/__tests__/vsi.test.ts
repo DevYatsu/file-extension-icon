@@ -5,6 +5,12 @@ import { getVSIFileIcon, getVSIFolderIcon } from "../api/vsi";
 describe("VSI Icons API", () => {
   describe("getVSIFileIcon", () => {
     it("should return the icon name for standard extensions", () => {
+      expect(getVSIFileIcon("index.mjs")).toBe("js");
+      expect(getVSIFileIcon("styles.css")).toBe("css");
+      expect(getVSIFileIcon("index.html")).toBe("html");
+    });
+
+    it("should return the icon name for standard extensions", () => {
       expect(getVSIFileIcon("index.ts")).toBe("typescript");
       expect(getVSIFileIcon("main.go")).toBe("go");
     });
@@ -53,13 +59,13 @@ describe("VSI Icons API", () => {
     });
 
     it("should handle edge cases like empty strings or strings with only dots", () => {
-      expect(getVSIFileIcon("")).toBe("file");
-      expect(getVSIFileIcon(".")).toBe("file");
-      expect(getVSIFileIcon("..")).toBe("file");
+      expect(getVSIFileIcon("")).toBe("default_file");
+      expect(getVSIFileIcon(".")).toBe("default_file");
+      expect(getVSIFileIcon("..")).toBe("default_file");
     });
 
     it("should return 'file' for unknown files", () => {
-      expect(getVSIFileIcon("unknown.xyz123")).toBe("file");
+      expect(getVSIFileIcon("unknown.xyz123")).toBe("default_file");
     });
   });
 
@@ -79,8 +85,8 @@ describe("VSI Icons API", () => {
 
     it("should handle root folders", () => {
       expect(getVSIFolderIcon("src", true)).toBe("src"); // specific folder takes precedence
-      expect(getVSIFolderIcon("unknown", true)).toBe("root_folder");
-      expect(getVSIFolderIcon("", true)).toBe("root_folder");
+      expect(getVSIFolderIcon("unknown", true)).toBe("default_root_folder");
+      expect(getVSIFolderIcon("", true)).toBe("default_root_folder");
     });
 
     it("should handle paths for folders", () => {
@@ -89,12 +95,12 @@ describe("VSI Icons API", () => {
     });
 
     it("should handle edge cases for folders", () => {
-      expect(getVSIFolderIcon("")).toBe("folder");
-      expect(getVSIFolderIcon(".")).toBe("folder");
+      expect(getVSIFolderIcon("")).toBe("default_folder");
+      expect(getVSIFolderIcon(".")).toBe("default_folder");
     });
 
     it("should return 'folder' for unknown folders", () => {
-      expect(getVSIFolderIcon("some-unknown-folder")).toBe("folder");
+      expect(getVSIFolderIcon("some-unknown-folder")).toBe("default_folder");
     });
   });
 });

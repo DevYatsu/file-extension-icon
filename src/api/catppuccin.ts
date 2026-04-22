@@ -9,12 +9,13 @@ const theme = new IconTheme({
     fileNames: (def as FileIconDefinition).fileNames,
     extensions: (def as FileIconDefinition).fileExtensions,
   })),
-  fileDefault: "file",
+  fileDefault: "_file",
   folderDefinitions: Object.entries(folderIcons).map(([icon, def]) => ({
     icon,
     folderNames: (def as FolderIconDefinition).folderNames || [],
   })),
-  folderDefault: "folder",
+  folderDefault: "_folder",
+  folderRootDefault: "_root",
 });
 
 /**
