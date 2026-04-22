@@ -6,5 +6,4 @@ export { getVSIFileIcon, getVSIFolderIcon } from "./api/vsi";
 export type * from "./types/icons";
 
 // Utility exports
-export { getIconFromMap, findIconInCollection } from "./utils/icon-map";
-export { createDataUri, convertToBase64 } from "./utils/base64";
+export { getIconFromMap } from "./utils/icon-map";

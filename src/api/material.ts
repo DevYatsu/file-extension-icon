@@ -1,22 +1,19 @@
-import { materialFileIcons } from "../data/material/file-icons";
 import {
   materialFileExtensionsToIcons,
   materialFileNamesToIcons,
-} from "../data/material/file-names";
-import { materialFolderIcons, materialFolderIconsOpen } from "../data/material/folder-icons";
-import { materialFolderNamesToIcons } from "../data/material/folder-names";
-import { createDataUri } from "../utils/base64";
-import { findIconInCollection, getIconFromMap } from "../utils/icon-map";
+} from "../mappings/material/file-names";
+import { materialFolderNamesToIcons } from "../mappings/material/folder-names";
+import { getIconFromMap } from "../utils/icon-map";
 
 /**
- * Gets the Material Icon for a given file name
+ * Gets the Material Icon name for a given file name
  * @param fileName - The file name (with or without extension)
- * @returns A base64-encoded SVG data URI
+ * @returns The icon name
  *
  * @example
  * ```ts
  * const icon = getMaterialFileIcon('index.js');
- * // Returns: "data:image/svg+xml;base64,..."
+ * // Returns: "javascript"
  * ```
  */
 export function getMaterialFileIcon(fileName: string): string {
@@ -57,25 +54,20 @@ export function getMaterialFileIcon(fileName: string): string {
     iconName = "file";
   }
 
-  // Find the icon in the collection
-  const icon = findIconInCollection(materialFileIcons, iconName);
-
-  return createDataUri(icon);
+  return iconName;
 }
 
 /**
- * Gets the Material Icon for a given folder name
+ * Gets the Material Icon name for a given folder name
  * @param folderName - The folder name
- * @param open - Whether to get the open folder icon (default: false)
- * @returns A base64-encoded SVG data URI
+ * @returns The icon name
  *
  * @example
  * ```ts
- * const closedIcon = getMaterialFolderIcon('components');
- * const openIcon = getMaterialFolderIcon('components', true);
+ * const icon = getMaterialFolderIcon('components');
  * ```
  */
-export function getMaterialFolderIcon(folderName: string, open = false): string {
+export function getMaterialFolderIcon(folderName: string): string {
   const lowerFolderName = folderName.toLowerCase();
 
   // Check if there's a specific icon for this folder name
@@ -89,12 +81,5 @@ export function getMaterialFolderIcon(folderName: string, open = false): string 
     iconName = "folder";
   }
 
-  // Get the appropriate folder icon (open or closed)
-  const iconMap = open ? materialFolderIconsOpen : materialFolderIcons;
-  const icon =
-    getIconFromMap(iconMap, iconName as keyof typeof iconMap) ||
-    getIconFromMap(iconMap, "folder" as keyof typeof iconMap) ||
-    "";
-
-  return createDataUri(icon);
+  return iconName;
 }

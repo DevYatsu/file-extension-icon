@@ -1,28 +1,15 @@
 import {
   materialFileExtensionsToIcons,
   materialFileNamesToIcons,
-} from "../data/material/file-names";
-import { materialFolderNamesToIcons } from "../data/material/folder-names";
-import { vsiFileExtensionsToIcons, vsiFileNamesToIcons } from "../data/vsi/file-names";
-import { vsiFolderNamesToIcons } from "../data/vsi/folder-names";
+} from "../mappings/material/file-names";
+import { materialFolderNamesToIcons } from "../mappings/material/folder-names";
+import { vsiFileExtensionsToIcons, vsiFileNamesToIcons } from "../mappings/vsi/file-names";
+import { vsiFolderNamesToIcons } from "../mappings/vsi/folder-names";
 
 /**
  * Represents a mapping from icon names to their SVG content
  */
 export type IconMap = Record<string, string>;
-
-/**
- * Represents a collection of icon maps (for split icon files)
- */
-export type IconCollection = IconMap[];
-
-/**
- * Options for getting folder icons
- */
-export interface FolderIconOptions {
-  /** Whether to get the open folder icon */
-  open?: boolean;
-}
 
 /**
  * The Material File Extension Keys

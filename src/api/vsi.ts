@@ -1,19 +1,16 @@
-import { vsiFileIcons } from "../data/vsi/file-icons";
-import { vsiFileExtensionsToIcons, vsiFileNamesToIcons } from "../data/vsi/file-names";
-import { vsiFolderIcons, vsiFolderIconsOpen } from "../data/vsi/folder-icons";
-import { vsiFolderNamesToIcons } from "../data/vsi/folder-names";
-import { createDataUri } from "../utils/base64";
-import { findIconInCollection, getIconFromMap } from "../utils/icon-map";
+import { vsiFileExtensionsToIcons, vsiFileNamesToIcons } from "../mappings/vsi/file-names";
+import { vsiFolderNamesToIcons } from "../mappings/vsi/folder-names";
+import { getIconFromMap } from "../utils/icon-map";
 
 /**
- * Gets the VSCode Icon for a given file name
+ * Gets the VSCode Icon name for a given file name
  * @param fileName - The file name (with or without extension)
- * @returns A base64-encoded SVG data URI
+ * @returns The icon name
  *
  * @example
  * ```ts
  * const icon = getVSIFileIcon('index.ts');
- * // Returns: "data:image/svg+xml;base64,..."
+ * // Returns: "typescript"
  * ```
  */
 export function getVSIFileIcon(fileName: string): string {
@@ -53,25 +50,20 @@ export function getVSIFileIcon(fileName: string): string {
     iconName = "file";
   }
 
-  // Find the icon in the collection
-  const icon = findIconInCollection(vsiFileIcons, iconName);
-
-  return createDataUri(icon);
+  return iconName;
 }
 
 /**
- * Gets the VSCode Icon for a given folder name
+ * Gets the VSCode Icon name for a given folder name
  * @param folderName - The folder name
- * @param open - Whether to get the open folder icon (default: false)
- * @returns A base64-encoded SVG data URI
+ * @returns The icon name
  *
  * @example
  * ```ts
- * const closedIcon = getVSIFolderIcon('src');
- * const openIcon = getVSIFolderIcon('src', true);
+ * const icon = getVSIFolderIcon('src');
  * ```
  */
-export function getVSIFolderIcon(folderName: string, open = false): string {
+export function getVSIFolderIcon(folderName: string): string {
   const lowerFolderName = folderName.toLowerCase();
 
   // Check if there's a specific icon for this folder name
@@ -85,12 +77,5 @@ export function getVSIFolderIcon(folderName: string, open = false): string {
     iconName = "folder";
   }
 
-  // Get the appropriate folder icon (open or closed)
-  const iconMap = open ? vsiFolderIconsOpen : vsiFolderIcons;
-  const icon =
-    getIconFromMap(iconMap, iconName as keyof typeof iconMap) ||
-    getIconFromMap(iconMap, "folder" as keyof typeof iconMap) ||
-    "";
-
-  return createDataUri(icon);
+  return iconName;
 }
