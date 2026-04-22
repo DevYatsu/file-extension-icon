@@ -1,6 +1,6 @@
 {
   "name": "vscode-icon-resolver",
-  "version": "1.1.0",
+  "version": "1.0.0",
   "description": "VScode file and folder icon name resolver for Material, Catppuccin, and VSCode icons",
   "keywords": [
     "icon",
@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/DevYatsu/file-extension-icon"
+    "url": "git+https://github.com/DevYatsu/file-extension-icon.git"
   },
   "license": "MIT",
   "author": {
