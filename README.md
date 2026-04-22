@@ -2,9 +2,9 @@
 
 ![VSCode Icon Resolver Cover](/cover.jpeg)
 
-> High-performance, lightweight library to resolve file and folder icon names for Material, Catppuccin, and VSCode icon themes.
+> Lightweight library to resolve file and folder icon names for Material, Catppuccin, and VSCode icon themes.
 
-A modernized, high-performance icon name resolver for Web and Node.js apps. Inspired by `vscode-icons-js` but expanded to support multiple popular icon sets with **O(1)** lookup complexity.
+A modernized icon name resolver for Desktop and Mobile apps (rarely needed for web projects). Inspired by `vscode-icons-js` but expanded to support multiple popular icon sets.
 
 [![npm version](https://img.shields.io/npm/v/vscode-icon-resolver)](https://www.npmjs.com/package/vscode-icon-resolver)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
