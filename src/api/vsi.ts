@@ -1,6 +1,7 @@
-import { vsiFileExtensionsToIcons, vsiFileNamesToIcons } from "../mappings/vsi/file-names";
-import { vsiFolderNamesToIcons } from "../mappings/vsi/folder-names";
-import { getIconFromMap } from "../utils/icon-map";
+import { extensions as fileExtensions } from "../mappings/vsi/file-names";
+import { extensions as folderExtensions } from "../mappings/vsi/folder-names";
+import { VSIFileIcon, VSIFolderIcon } from "../mappings/vsi/types";
+import { getBaseName } from "../utils";
 
 /**
  * Gets the VSCode Icon name for a given file name
@@ -14,48 +15,72 @@ import { getIconFromMap } from "../utils/icon-map";
  * ```
  */
 export function getVSIFileIcon(fileName: string): string {
-  const lowerFileName = fileName.toLowerCase();
+  const baseName = getBaseName(fileName);
+  const lowerFileName = baseName.toLowerCase();
+
+  if (!lowerFileName) return fileExtensions.default.file.icon;
+
+  // 1. Try filename matches first (filename: true)
+  for (const def of fileExtensions.supported) {
+    const definition = def as VSIFileIcon;
+    if (definition.disabled) continue;
+    if (
+      definition.filename &&
+      definition.extensions.some((ext) => ext.toLowerCase() === lowerFileName)
+    ) {
+      return definition.icon;
+    }
+  }
+
+  // 2. Try glob matches
+  for (const def of fileExtensions.supported) {
+    const definition = def as VSIFileIcon;
+    if (definition.disabled) continue;
+    if (definition.filenamesGlob && definition.extensionsGlob) {
+      const matchFile = definition.filenamesGlob.some((f) =>
+        lowerFileName.startsWith(f.toLowerCase())
+      );
+      const matchExt = definition.extensionsGlob.some((e) =>
+        lowerFileName.endsWith(e.toLowerCase())
+      );
+      if (matchFile && matchExt) {
+        return definition.icon;
+      }
+    }
+  }
+
+  // 3. Try extension matches (including languages)
   const parts = lowerFileName.split(".");
-  let iconName = "";
-
-  // Try to match from most specific to least specific
-  while (parts.length > 0) {
-    const currentName = parts.join(".");
-
-    // Check file names first
-    const nameIcon = getIconFromMap(
-      vsiFileNamesToIcons,
-      currentName as keyof typeof vsiFileNamesToIcons
-    );
-    if (nameIcon) {
-      iconName = nameIcon;
-      break;
-    }
-
-    // Then check extensions
-    const extIcon = getIconFromMap(
-      vsiFileExtensionsToIcons,
-      currentName as keyof typeof vsiFileExtensionsToIcons
-    );
-    if (extIcon) {
-      iconName = extIcon;
-      break;
-    }
-
+  while (parts.length > 1) {
     parts.shift();
+    const ext = parts.join(".");
+    for (const def of fileExtensions.supported) {
+      const definition = def as VSIFileIcon;
+      if (definition.disabled) continue;
+
+      // Check extensions
+      if (!definition.filename && definition.extensions.some((e) => e.toLowerCase() === ext)) {
+        return definition.icon;
+      }
+
+      // Check languages
+      if (definition.languages) {
+        for (const lang of definition.languages) {
+          if (lang.knownExtensions?.some((e) => e.toLowerCase() === ext)) {
+            return definition.icon;
+          }
+        }
+      }
+    }
   }
 
-  // Default to generic file icon
-  if (!iconName) {
-    iconName = "file";
-  }
-
-  return iconName;
+  return fileExtensions.default.file.icon;
 }
 
 /**
  * Gets the VSCode Icon name for a given folder name
  * @param folderName - The folder name
+ * @param isRoot - Whether the folder is at the root
  * @returns The icon name
  *
  * @example
@@ -63,19 +88,22 @@ export function getVSIFileIcon(fileName: string): string {
  * const icon = getVSIFolderIcon('src');
  * ```
  */
-export function getVSIFolderIcon(folderName: string): string {
-  const lowerFolderName = folderName.toLowerCase();
+export function getVSIFolderIcon(folderName: string, isRoot: boolean = false): string {
+  const baseName = getBaseName(folderName);
+  const lowerFolderName = baseName.toLowerCase();
 
-  // Check if there's a specific icon for this folder name
-  let iconName = getIconFromMap(
-    vsiFolderNamesToIcons,
-    lowerFolderName as keyof typeof vsiFolderNamesToIcons
-  );
+  if (!lowerFolderName)
+    return isRoot
+      ? folderExtensions.default.root_folder.icon
+      : folderExtensions.default.folder.icon;
 
-  // Default to generic folder icon
-  if (!iconName) {
-    iconName = "folder";
+  for (const def of folderExtensions.supported) {
+    const definition = def as VSIFolderIcon;
+    if (definition.disabled) continue;
+    if (definition.extensions.some((ext) => ext.toLowerCase() === lowerFolderName)) {
+      return definition.icon;
+    }
   }
 
-  return iconName;
+  return isRoot ? folderExtensions.default.root_folder.icon : folderExtensions.default.folder.icon;
 }

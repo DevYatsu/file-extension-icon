@@ -4,54 +4,97 @@ import { getVSIFileIcon, getVSIFolderIcon } from "../api/vsi";
 
 describe("VSI Icons API", () => {
   describe("getVSIFileIcon", () => {
-    it("should return a data URI", () => {
-      const result = getVSIFileIcon("test.ts");
-      expect(result).toMatch(/^data:image\/svg\+xml;base64,/);
+    it("should return the icon name for standard extensions", () => {
+      expect(getVSIFileIcon("index.ts")).toBe("typescript");
+      expect(getVSIFileIcon("main.go")).toBe("go");
     });
 
-    it("should handle files without extensions", () => {
-      const result = getVSIFileIcon("Makefile");
-      expect(result).toMatch(/^data:image\/svg\+xml;base64,/);
+    it("should handle exact filename matches", () => {
+      expect(getVSIFileIcon("package.json")).toBe("npm");
+      expect(getVSIFileIcon("composer.json")).toBe("composer");
+      expect(getVSIFileIcon("composer.lock")).toBe("composer");
     });
 
-    it("should handle complex file names", () => {
-      const result = getVSIFileIcon("jest.config.js");
-      expect(result).toMatch(/^data:image\/svg\+xml;base64,/);
+    it("should handle glob matches", () => {
+      expect(getVSIFileIcon("test.ts")).toBe("testts");
+      expect(getVSIFileIcon("test.js")).toBe("testjs");
+    });
+
+    it("should handle language-based and framework matches", () => {
+      expect(getVSIFileIcon("config.yaml")).toBe("esphome");
+      expect(getVSIFileIcon("allurerc.js")).toBe("allure");
+
+      expect(getVSIFileIcon("app.component.ts")).toBe("typescript");
+      expect(getVSIFileIcon("app.service.ts")).toBe("typescript");
+    });
+
+    it("should handle CI/CD and pipeline files", () => {
+      expect(getVSIFileIcon("bitbucket-pipelines.yml")).toBe("bitbucketpipeline");
+      expect(getVSIFileIcon("azure-pipelines.yml")).toBe("azurepipelines");
+      expect(getVSIFileIcon(".travis.yml")).toBe("travis");
+    });
+
+    it("should handle niche config files", () => {
+      expect(getVSIFileIcon(".all-contributorsrc")).toBe("allcontributors");
+    });
+
+    it("should handle multiple dots", () => {
+      expect(getVSIFileIcon("jest.config.js")).toBe("jest");
+    });
+
+    it("should handle full paths and relative paths", () => {
+      expect(getVSIFileIcon("/path/to/index.ts")).toBe("typescript");
+      expect(getVSIFileIcon("./local/main.go")).toBe("go");
     });
 
     it("should be case-insensitive", () => {
-      const lower = getVSIFileIcon("file.ts");
-      const upper = getVSIFileIcon("FILE.TS");
-      expect(lower).toBe(upper);
+      expect(getVSIFileIcon("INDEX.TS")).toBe("typescript");
+      expect(getVSIFileIcon("PACKAGE.JSON")).toBe("npm");
     });
 
-    it("should return default icon for unknown extensions", () => {
-      const result = getVSIFileIcon("unknown.xyz123");
-      expect(result).toMatch(/^data:image\/svg\+xml;base64,/);
+    it("should handle edge cases like empty strings or strings with only dots", () => {
+      expect(getVSIFileIcon("")).toBe("file");
+      expect(getVSIFileIcon(".")).toBe("file");
+      expect(getVSIFileIcon("..")).toBe("file");
+    });
+
+    it("should return 'file' for unknown files", () => {
+      expect(getVSIFileIcon("unknown.xyz123")).toBe("file");
     });
   });
 
   describe("getVSIFolderIcon", () => {
-    it("should return a data URI for closed folder", () => {
-      const result = getVSIFolderIcon("node_modules");
-      expect(result).toMatch(/^data:image\/svg\+xml;base64,/);
+    it("should return the icon name for common folders", () => {
+      expect(getVSIFolderIcon("node_modules")).toBe("node");
+      expect(getVSIFolderIcon("src")).toBe("src");
+      expect(getVSIFolderIcon(".git")).toBe("git");
     });
 
-    it("should return a data URI for open folder", () => {
-      const result = getVSIFolderIcon("node_modules", true);
-      expect(result).toMatch(/^data:image\/svg\+xml;base64,/);
+    it("should handle niche folder names", () => {
+      expect(getVSIFolderIcon("docker")).toBe("docker");
+      expect(getVSIFolderIcon("kubernetes")).toBe("kubernetes");
+      expect(getVSIFolderIcon("cypress")).toBe("cypress");
+      expect(getVSIFolderIcon(".storybook")).toBe("story");
     });
 
-    it("should return different icons for open vs closed", () => {
-      const closed = getVSIFolderIcon("dist", false);
-      const open = getVSIFolderIcon("dist", true);
-      expect(closed).toBeDefined();
-      expect(open).toBeDefined();
+    it("should handle root folders", () => {
+      expect(getVSIFolderIcon("src", true)).toBe("src"); // specific folder takes precedence
+      expect(getVSIFolderIcon("unknown", true)).toBe("root_folder");
+      expect(getVSIFolderIcon("", true)).toBe("root_folder");
     });
 
-    it("should handle unknown folder names", () => {
-      const result = getVSIFolderIcon("unknown-folder-xyz");
-      expect(result).toMatch(/^data:image\/svg\+xml;base64,/);
+    it("should handle paths for folders", () => {
+      expect(getVSIFolderIcon("/path/to/src")).toBe("src");
+      expect(getVSIFolderIcon("./node_modules")).toBe("node");
+    });
+
+    it("should handle edge cases for folders", () => {
+      expect(getVSIFolderIcon("")).toBe("folder");
+      expect(getVSIFolderIcon(".")).toBe("folder");
+    });
+
+    it("should return 'folder' for unknown folders", () => {
+      expect(getVSIFolderIcon("some-unknown-folder")).toBe("folder");
     });
   });
 });
